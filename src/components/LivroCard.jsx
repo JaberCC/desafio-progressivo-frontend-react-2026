@@ -1,5 +1,5 @@
 import React from "react";
-import {formatarPreco} from "../dados/formatarPreco";
+import formatarPreco from "../dados/formatarPreco";
 
 export default function LivroCard({livro}) {
   // A Pessoa 1 completa este componente na semana 1.
