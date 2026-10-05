@@ -1,5 +1,5 @@
 import React from "react";
-import {formatarPreco} from "../dados/formatarPreco";
+import formatarPreco from "../dados/formatarPreco";
 
 export default function LivroCard({livro}) {
   // A Pessoa 1 completa este componente na semana 1.
@@ -7,7 +7,7 @@ export default function LivroCard({livro}) {
     <article className="book-card">
       <div className={"book-cover book-cover--${livro.cor}"}>
         <h3>{livro.titulo}</h3>
-        <small>{titulo.autor}</small>
+        <small>{livro.autor}</small>
         <b>p.42</b>
       </div>
       <div className="book-card_details">

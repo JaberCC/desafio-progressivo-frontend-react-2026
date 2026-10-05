@@ -1,4 +1,7 @@
-export default function Catalogo() {
+import React from 'react';
+import LivroCard from '../components/LivroCard.jsx';
+
+export default function Catalogo({ livros }) {
   return (
     <main id="inicio">
       <section className="hero">
@@ -33,6 +36,7 @@ export default function Catalogo() {
           </div>
         </div>
       </section>
+
       <section className="catalog container" id="catalogo">
         <div className="section-heading">
           <div>
@@ -40,8 +44,16 @@ export default function Catalogo() {
             <h2>Escolha sua próxima leitura</h2>
           </div>
         </div>
-        <div className="products__list"></div>
+        
+        <div className="products__list">
+          {livros && livros.map((livro) => (
+            <React.Fragment key={livro.id}>
+              <LivroCard livro={livro} />
+            </React.Fragment>
+          ))}
+        </div>
       </section>
+
       <section className="about" id="sobre">
         <div className="container">
           <p className="eyebrow">pagina 42</p>
