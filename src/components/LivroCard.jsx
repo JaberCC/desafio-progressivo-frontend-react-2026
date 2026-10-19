@@ -17,9 +17,10 @@ export default function LivroCard({livro, onAdicionar}) {
         <span>{livro.autor}</span>
         <div>
           <strong>{formatarPreco(livro.preco)}</strong>
-          <button>
+          <button
             className="button"
-            onClick={() => onAdicionar(livro)}
+            onClick={() => onAdicionar(livro)}>
+              Adicionar ao Carrinho
           </button>
         </div>
       </div>

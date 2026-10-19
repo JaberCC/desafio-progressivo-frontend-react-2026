@@ -4,17 +4,13 @@ import Rodape from "./components/Rodape.jsx";
 import Catalogo from "./pages/Catalogo.jsx";
 import Carrinho from "./components/Carrinho.jsx";
 import { API_KEY, API_URL } from "./dados/api.js";
-import Carrinho from "./components/Carrinho.jsx";
+
 
 export default function App() {
   const [livros, setLivros] = useState([]);
-<<<<<<< HEAD
   const [carrinho, setCarrinho] = useState([]);
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
-=======
-  const [carrinhoAberto, setCarrinhoAberto] = useState(false);
-  const [carrinho, setCarrinho] = useState([]);
->>>>>>> 6d02b650cfe790933486512c497d3bd806f3dfbe
+  
 
   useEffect(() => {
     async function carregarLivros() {
@@ -45,19 +41,9 @@ export default function App() {
   }
   return (
     <>
-<<<<<<< HEAD
-      <Cabecalho />
-      <Catalogo livros={livros} onAdicionar={adicionarAoCarrinho} />
-      <Carrinho
-        carrinho={carrinho}
-        carrinhoAberto={carrinhoAberto}
-        setCarrinhoAberto={setCarrinhoAberto}
-        setCarrinho={setCarrinho}
-      />
-=======
       <Cabecalho onOpenCart={() => setCarrinhoAberto(true)} />
       
-      <Catalogo livros={livros} />
+      <Catalogo livros={livros}onAdicionar={adicionarAoCarrinho}/>
       
       <Carrinho 
         carrinhoAberto={carrinhoAberto}
@@ -66,7 +52,6 @@ export default function App() {
         setCarrinho={setCarrinho}
       />
 
->>>>>>> 6d02b650cfe790933486512c497d3bd806f3dfbe
       <Rodape />
     </>
   );
