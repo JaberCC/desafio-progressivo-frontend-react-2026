@@ -1,7 +1,8 @@
 import React from "react";
 import formatarPreco from "../dados/formatarPreco";
+import "../styles/home.css";
 
-export default function LivroCard({livro}) {
+export default function LivroCard({livro, onAdicionar}) {
   // A Pessoa 1 completa este componente na semana 1.
   return (
     <article className="book-card">
@@ -14,7 +15,13 @@ export default function LivroCard({livro}) {
         <p>{livro.categoria}</p>
         <h3>{livro.titulo}</h3>
         <span>{livro.autor}</span>
-        <div><strong>{formatarPreco(livro.preco)}</strong></div>
+        <div>
+          <strong>{formatarPreco(livro.preco)}</strong>
+          <button>
+            className="button"
+            onClick={() => onAdicionar(livro)}
+          </button>
+        </div>
       </div>
     </article>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import LivroCard from '../components/LivroCard.jsx';
 
-export default function Catalogo({ livros }) {
+export default function Catalogo({ livros, onAdicionar }) {
   return (
     <main id="inicio">
       <section className="hero">
@@ -48,7 +48,7 @@ export default function Catalogo({ livros }) {
         <div className="products__list">
           {livros && livros.map((livro) => (
             <React.Fragment key={livro.id}>
-              <LivroCard livro={livro} />
+              <LivroCard livro={livro} onAdicionar={onAdicionar}/>
             </React.Fragment>
           ))}
         </div>
