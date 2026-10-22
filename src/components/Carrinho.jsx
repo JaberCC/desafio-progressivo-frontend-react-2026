@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/cart.css'; 
 import  formatarPreco from "../dados/formatarPreco.js";
+import FinalizarCompra from '../components/FinalizarCompra.jsx'; 
 
 export default function Carrinho({
   carrinhoAberto,
@@ -77,6 +78,13 @@ export default function Carrinho({
             <span>Total:</span>
             <strong>{formatarPreco(total)}</strong>
           </div>
+
+          <FinalizarCompra 
+            carrinho={carrinho} 
+            total={total} 
+            onSucesso={() => setCarrinho([])} 
+          />
+        
           <button className="cart__checkout">Finalizar Compra</button>
         </div>
 
