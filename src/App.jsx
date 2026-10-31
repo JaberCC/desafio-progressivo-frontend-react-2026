@@ -4,6 +4,9 @@ import Rodape from "./components/Rodape.jsx";
 import Catalogo from "./pages/Catalogo.jsx";
 import Carrinho from "./components/Carrinho.jsx";
 import { API_KEY, API_URL } from "./dados/api.js";
+import { Routes, Route } from "react-router-dom";
+import Livro from "./pages/Livro.jsx";
+
 
 
 export default function App() {
@@ -42,8 +45,25 @@ export default function App() {
   return (
     <>
       <Cabecalho onOpenCart={() => setCarrinhoAberto(true)} />
+
+      <main>
+        <Routes>
+          <Route
+            path="/"
+            element={<Catalogo livros={livros} onAdicionar={adicionarAoCarrinho} />}
+          />
+          <Route
+            path="/livros/:id"
+            element={<Livro onAdicionar={adicionarAoCarrinho} />}
+          />
+          <Route
+            path="*"
+            element={<h2>Página não encontrada</h2>}
+          />
+        </Routes>
+      </main>  
       
-      <Catalogo livros={livros}onAdicionar={adicionarAoCarrinho}/>
+      {/*<Catalogo livros={livros}onAdicionar={adicionarAoCarrinho}/>*/}
       
       <Carrinho 
         carrinhoAberto={carrinhoAberto}
