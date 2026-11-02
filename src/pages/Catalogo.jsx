@@ -1,7 +1,7 @@
 import React from 'react';
 import LivroCard from '../components/LivroCard.jsx';
 
-export default function Catalogo({ livros, onAdicionar }) {
+export default function Catalogo({ livros, onAdicionar, carregando, erro }) {
   return (
     <main id="inicio">
       <section className="hero">
@@ -45,13 +45,29 @@ export default function Catalogo({ livros, onAdicionar }) {
           </div>
         </div>
         
-        <div className="products__list">
-          {livros && livros.map((livro) => (
-            <React.Fragment key={livro.id}>
-              <LivroCard livro={livro} onAdicionar={onAdicionar}/>
-            </React.Fragment>
-          ))}
-        </div>
+       
+        {carregando && <p style={{ textAlign: 'center', padding: '2rem 0' }}>Carregando...</p>}
+
+        {erro && (
+          <div role="alert" style={{ textAlign: 'center', padding: '2rem 0', color: '#ff4d4d' }}>
+            {erro}
+          </div>
+        )}
+
+        {!carregando && !erro && livros.length === 0 && (
+          <p style={{ textAlign: 'center', padding: '2rem 0' }}>Nenhum livro encontrado</p>
+        )}
+
+        
+        {!carregando && !erro && livros.length > 0 && (
+          <div className="products__list">
+            {livros.map((livro) => (
+              <React.Fragment key={livro.id}>
+                <LivroCard livro={livro} onAdicionar={onAdicionar} />
+              </React.Fragment>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="about" id="sobre">

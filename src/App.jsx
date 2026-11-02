@@ -7,13 +7,10 @@ import { API_KEY, API_URL } from "./dados/api.js";
 import { Routes, Route } from "react-router-dom";
 import Livro from "./pages/Livro.jsx";
 
-
-
 export default function App() {
   const [livros, setLivros] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
-  
 
   useEffect(() => {
     async function carregarLivros() {
@@ -30,16 +27,19 @@ export default function App() {
 
     carregarLivros();
   }, []);
-  function adicionarAoCarrinho (livro) {
+  function adicionarAoCarrinho(livro) {
     setCarrinho((carrinhoAtual) => {
       const itemExistente = carrinhoAtual.find((item) => item.id === livro.id);
 
       if (itemExistente) {
-        return carrinhoAtual.map((item) => item.id === livro.id ? { ...item, quantidade: item.quantidade + 1} : item
-      ); 
+        return carrinhoAtual.map((item) =>
+          item.id === livro.id
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item,
+        );
       }
-    
-    return [...carrinhoAtual, {...livro, quantidade: 1}];
+
+      return [...carrinhoAtual, { ...livro, quantidade: 1 }];
     });
   }
   return (
@@ -50,22 +50,23 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={<Catalogo livros={livros} onAdicionar={adicionarAoCarrinho} />}
+            element={
+              <Catalogo livros={livros} onAdicionar={adicionarAoCarrinho} />
+            }
           />
           <Route
             path="/livros/:id"
-            element={<Livro onAdicionar={adicionarAoCarrinho} />}
+            element={
+              <Livro livros={livros} onAdicionar={adicionarAoCarrinho} />
+            }
           />
-          <Route
-            path="*"
-            element={<h2>Página não encontrada</h2>}
-          />
+          <Route path="*" element={<h2>Página não encontrada</h2>} />
         </Routes>
-      </main>  
-      
+      </main>
+
       {/*<Catalogo livros={livros}onAdicionar={adicionarAoCarrinho}/>*/}
-      
-      <Carrinho 
+
+      <Carrinho
         carrinhoAberto={carrinhoAberto}
         setCarrinhoAberto={setCarrinhoAberto}
         carrinho={carrinho}

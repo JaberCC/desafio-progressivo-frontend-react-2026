@@ -7,7 +7,7 @@ export default function LivroCard({livro, onAdicionar}) {
   // A Pessoa 1 completa este componente na semana 1.
   return (
     <article className="book-card">
-      <Link to={`/Livros/${livro.id}`} className="book-card__link">
+      <Link to={`/livros/${livro.id}`} className="book-card__link">
         <div className={`book-cover book-cover--${livro.cor}`}>
           <h3>{livro.titulo}</h3>
           <small>{livro.autor}</small>
