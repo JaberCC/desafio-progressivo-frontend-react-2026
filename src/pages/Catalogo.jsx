@@ -45,7 +45,6 @@ export default function Catalogo({ livros, onAdicionar, carregando, erro }) {
           </div>
         </div>
         
-       
         {carregando && <p style={{ textAlign: 'center', padding: '2rem 0' }}>Carregando...</p>}
 
         {erro && (

@@ -11,22 +11,50 @@ export default function App() {
   const [livros, setLivros] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState("");
+
 
   useEffect(() => {
-    async function carregarLivros() {
+    let ignorar = false;
+    async function carregar() {
+      setCarregando(true);
+      setErro("");
+
       try {
         const resposta = await fetch(API_URL, {
           headers: { "x-api-key": API_KEY },
         });
+
+        if (!resposta.ok) {
+          throw new Error(`Erro na requisição: ${resposta.status}`);
+        }
+
         const dados = await resposta.json();
-        setLivros(dados);
+
+        if (!ignorar) {
+          const listaLivros = Array.isArray(dados) ? dados : (dados.livros || []);
+          setLivros(listaLivros);
+        }
       } catch (erro) {
-        console.error("Erro ao carregar livros:", erro);
+        if (!ignorar) {
+          console.error("Erro ao carregar livros:", erro);
+          setErro(erro.menssage || "Não foi possível carregar os livros.");
+        }
+      } finally {
+        if (!ignorar) {
+          setCarregando(false);
+        }
       }
     }
 
-    carregarLivros();
+    carregar();
+
+    return () => {
+      ignorar = true;
+    };
   }, []);
+
   function adicionarAoCarrinho(livro) {
     setCarrinho((carrinhoAtual) => {
       const itemExistente = carrinhoAtual.find((item) => item.id === livro.id);
@@ -51,13 +79,21 @@ export default function App() {
           <Route
             path="/"
             element={
-              <Catalogo livros={livros} onAdicionar={adicionarAoCarrinho} />
+              <Catalogo livros={livros} onAdicionar={adicionarAoCarrinho}
+              carregando={carregando}
+              erro={erro}
+              />
             }
           />
           <Route
             path="/livros/:id"
             element={
-              <Livro livros={livros} onAdicionar={adicionarAoCarrinho} />
+              <Livro
+                livros={livros} 
+                onAdicionar={adicionarAoCarrinho}
+                carregando={carregando}
+                erro={erro} 
+              />
             }
           />
           <Route path="*" element={<h2>Página não encontrada</h2>} />
